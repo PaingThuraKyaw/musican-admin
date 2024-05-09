@@ -1,0 +1,12 @@
+black gray - #3b3b3c
+milk - #dbe2e3
+white gray - #848386
+sky blue - #5155c9
+cyan - #11c9f1
+
+red - #e60023;
+red:hover - #b60000;
+red:active - #a3081a
+
+
+
