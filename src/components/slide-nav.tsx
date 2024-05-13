@@ -14,7 +14,7 @@ const SliderNav = () => {
   return (
     <>
       <Box className={classes.sliderContainer} w={width ? 70 : 250}>
-        <Box my={25} ml={20} >Logo</Box>
+        <Box my={15} ml={20} >Logo</Box>
         {navLink.map((nav) => {
           return (
             <Link
