@@ -12,6 +12,7 @@ import AuthLayout from "../../components/AuthLayout";
 import { useForm } from "@mantine/form";
 import classes from "./style/auth.module.css";
 import { Link } from "react-router-dom";
+import { useRegister } from "../../store/server/auth/mutation";
 
 const Register = () => {
   const form = useForm({
@@ -33,7 +34,7 @@ const Register = () => {
     },
   });
 
-  
+  const register = useRegister();
 
   return (
     <AuthLayout>
@@ -45,10 +46,7 @@ const Register = () => {
               Register to your account
             </Text>
           </Flex>
-          <form
-            onSubmit={form.onSubmit((values) => console.log(values))}
-            action=""
-          >
+          <form onSubmit={form.onSubmit((values) => register.mutate(values))}>
             <Flex direction={"column"} gap={20}>
               <TextInput
                 placeholder="username"
@@ -62,11 +60,11 @@ const Register = () => {
                 label="Email"
                 {...form.getInputProps("email")}
               />
-                <PasswordInput
-                  key={form.key("password")}
-                  label="Password"
-                  {...form.getInputProps("password")}
-                />
+              <PasswordInput
+                key={form.key("password")}
+                label="Password"
+                {...form.getInputProps("password")}
+              />
               <Flex direction={"column"}>
                 <PasswordInput
                   key={form.key("password_confirmation")}
@@ -79,7 +77,9 @@ const Register = () => {
                 </Flex>
               </Flex>
               <Group justify="flex-end">
-                <Button type="submit">Create Account</Button>
+                <Button loading={register.isPending} type="submit">
+                  Create Account
+                </Button>
               </Group>
             </Flex>
           </form>

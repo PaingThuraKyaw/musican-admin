@@ -12,6 +12,7 @@ import AuthLayout from "../../components/AuthLayout";
 import { useForm } from "@mantine/form";
 import classes from "./style/auth.module.css";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../store/server/auth/mutation";
 
 const Login = () => {
   const form = useForm({
@@ -28,6 +29,8 @@ const Login = () => {
     },
   });
 
+  const login = useLogin();
+
   return (
     <AuthLayout>
       <Flex align={"center"} justify={"center"} h={"90vh"}>
@@ -39,7 +42,7 @@ const Login = () => {
             </Text>
           </Flex>
           <form
-            onSubmit={form.onSubmit((values) => console.log(values))}
+            onSubmit={form.onSubmit((values) => login.mutate(values))}
             action=""
           >
             <Flex direction={"column"} gap={20}>
@@ -61,7 +64,9 @@ const Login = () => {
                 </Flex>
               </Flex>
               <Group justify="flex-end">
-                <Button type="submit">Login</Button>
+                <Button loading={login.isPending} type="submit">
+                  Login
+                </Button>
               </Group>
             </Flex>
           </form>
