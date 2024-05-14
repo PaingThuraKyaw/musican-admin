@@ -25,7 +25,7 @@
   &:hover {
     box-shadow: light-dark(
       var(--mantine-color-red-1) 0px 0px 10px,
-      var(--mantine-color-blue-1) 0px 0px 2px
+      var(--mantine-color-red-1) 0px 0px 2px
     );
     /* background-color: var(--mantine-color-gray-1); */
   }
@@ -35,7 +35,7 @@
   color: white;
   background-color: light-dark(
     var(--mantine-color-red-8),
-    var(--mantine-color-blue-7)
+    var(--mantine-color-red-8)
   );
 }
 
