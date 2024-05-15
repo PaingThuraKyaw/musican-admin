@@ -38,6 +38,9 @@ dependencies:
   js-cookie:
     specifier: ^3.0.5
     version: 3.0.5
+  mantine-datatable:
+    specifier: ^7.9.1
+    version: 7.9.1(@mantine/core@7.9.0)(@mantine/hooks@7.9.0)(clsx@2.1.1)(react@18.3.1)
   react:
     specifier: ^18.2.0
     version: 18.3.1
@@ -47,6 +50,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.23.0
     version: 6.23.0(react-dom@18.3.1)(react@18.3.1)
+  zod:
+    specifier: ^3.23.8
+    version: 3.23.8
   zustand:
     specifier: ^4.5.2
     version: 4.5.2(@types/react@18.3.1)(react@18.3.1)
@@ -1918,6 +1924,20 @@ packages:
       yallist: 3.1.1
     dev: true
 
+  /mantine-datatable@7.9.1(@mantine/core@7.9.0)(@mantine/hooks@7.9.0)(clsx@2.1.1)(react@18.3.1):
+    resolution: {integrity: sha512-CmsP0GzrLfYxGq7PW6+fGSr8NGheN/0rxSxMBghsJOdfsjzVOq6zycgOyOcpE9gCw5X01RvQoUs1RP+MH2Tj9A==}
+    peerDependencies:
+      '@mantine/core': '>=7.8'
+      '@mantine/hooks': '>=7.8'
+      clsx: '>=2'
+      react: '>=18.2'
+    dependencies:
+      '@mantine/core': 7.9.0(@mantine/hooks@7.9.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
+      '@mantine/hooks': 7.9.0(react@18.3.1)
+      clsx: 2.1.1
+      react: 18.3.1
+    dev: false
+
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
@@ -2627,6 +2647,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+    dev: false
 
   /zustand@4.5.2(@types/react@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
