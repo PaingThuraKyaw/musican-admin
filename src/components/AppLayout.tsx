@@ -1,21 +1,20 @@
 import { Navigate, Outlet } from "react-router-dom";
 import SliderNav from "./slide-nav";
 import { Box, Flex } from "@mantine/core";
-import Navbar from "./navbar";
+import { useAuthStore } from "../store/client/useStore";
 
 const AppLayout = () => {
-  const token = true;
+  const { token } = useAuthStore();
 
-  if (!token) return <Navigate  to={'/login'} />;
+  if (!token) return <Navigate to={"/login"} />;
 
   return (
     <Box>
       <Flex gap={20}>
         <SliderNav />
-        <div>
-          <Navbar />
+        <Box w={'100%'} >
           <Outlet />
-        </div>
+        </Box>
       </Flex>
     </Box>
   );

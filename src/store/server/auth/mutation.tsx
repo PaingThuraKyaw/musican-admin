@@ -51,11 +51,13 @@ const login = async (payload: loginProp) => {
 };
 
 export const useLogin = () => {
-    const {setToken} = useAuthStore()
+  const { setToken } = useAuthStore();
+  const navigate = useNavigate(); // testing //
   return useMutation({
     mutationFn: (payload: loginProp) => login(payload),
     onSuccess: (data) => {
-      setToken(data.token)
+      setToken(data.token);
+      navigate("/");
       notifications.show({
         message: "Login Successfully",
         icon: <IconCheck />,
