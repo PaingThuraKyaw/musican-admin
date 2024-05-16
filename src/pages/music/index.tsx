@@ -1,19 +1,22 @@
-import { Box, Button, Flex, Text } from "@mantine/core";
+import { ActionIcon, Box, Flex, Text } from "@mantine/core";
 import NavbarLayout from "../../components/NavbarLayout";
 import SearchInput from "../../components/search-input";
 import { useDebouncedState, useDisclosure } from "@mantine/hooks";
 import { useMusic } from "../../store/server/music/queries";
 import { DataTable } from "mantine-datatable";
 import CreateMusic from "./components/create-music";
-import ActionButton from "../../components/action-button";
 import { useDeleteMusic } from "../../store/server/music/mutation";
 import ConfirmData from "../../components/confirm-button";
 import { useState } from "react";
+import EditMusic from "./components/edit-music";
+import { IconTrash } from "@tabler/icons-react";
 const Music = () => {
   const [value, setValue] = useDebouncedState("", 500);
 
+  const [page, setPage] = useState(1);
+
   const { data, isPending, isError } = useMusic({
-    page: "1",
+    page: page.toString(),
     size: "10",
     search: value,
   });
@@ -66,27 +69,25 @@ const Music = () => {
             {
               accessor: "id",
               title: "",
-              render: ({ id }) => {
+              render: (data) => {
                 return (
-                  <>
-                    <ActionButton>
-                      <Button
-                        size="sm"
+                  <Box>
+                    <Flex justify={"center"} gap={10}>
+                      <ActionIcon
                         fz={12}
-                        h={30}
-                        w={100}
                         onClick={() => {
-                          setDeleteId(id);
+                          setDeleteId(data.id);
                           open();
                         }}
-                        radius={"md"}
-                        variant="filled"
+                        variant="light"
                         color="var(--mantine-color-music-8)"
                       >
-                        Delete {id}
-                      </Button>
-                    </ActionButton>
-                  </>
+                        <IconTrash size={20} />
+                      </ActionIcon>
+
+                      <EditMusic data={data} />
+                    </Flex>
+                  </Box>
                 );
               },
             },
@@ -98,7 +99,7 @@ const Music = () => {
           totalRecords={data?.pagination.totalPage || 0}
           page={data?.pagination.page || 1}
           recordsPerPage={10}
-          onPageChange={() => {}}
+          onPageChange={(p) => setPage(p)}
         />
 
         {deleteId && (

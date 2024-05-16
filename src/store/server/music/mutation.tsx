@@ -7,9 +7,9 @@ import { IconCheck, IconX } from "@tabler/icons-react";
 interface MusicProp {
   name: string;
   artist_id: number;
-  song_mp3: File | null;
+  song_mp3: File | null | string;
   description: string;
-  song_image: File | null;
+  song_image: File | null | string;
   album_id: number;
 }
 
@@ -57,7 +57,7 @@ export const useDeleteMusic = () => {
   const query = useQueryClient();
   return useMutation({
     mutationFn: (id: number) => deleteMusic(id),
-    onSuccess: () => {        
+    onSuccess: () => {
       query.invalidateQueries({ queryKey: ["music"] });
       notifications.show({
         message: "Music delete Successfully",
@@ -70,6 +70,36 @@ export const useDeleteMusic = () => {
 
       notifications.show({
         title: "Music delete fail",
+        message: "Please try again!",
+        icon: <IconX />,
+        color: "red",
+      });
+    },
+  });
+};
+
+const updateMusic = async (id: number, payload: MusicProp) => {
+  const { data } = await axios.put(`music/${id}`, payload, {
+    headers: authJsonHeader(),
+  });
+  return data;
+};
+
+export const useUpdateMusic = (id: number) => {
+  const query = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: MusicProp) => updateMusic(id, payload),
+    onSuccess: () => {
+      query.invalidateQueries({ queryKey: ["music"] });
+      notifications.show({
+        message: "Music update Successfully",
+        icon: <IconCheck />,
+        color: "green",
+      });
+    },
+    onError: () => {
+      notifications.show({
+        title: "Music update fail",
         message: "Please try again!",
         icon: <IconX />,
         color: "red",

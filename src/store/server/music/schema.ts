@@ -10,6 +10,8 @@ export const musicDataSchema = z.object({
   artist: z.string(),
   album: z.string(),
   release_date: z.string(),
+  artist_id: z.number(),
+  album_id: z.number(),
 });
 
 export const musicSchema = getApiResponse(z.array(musicDataSchema));
