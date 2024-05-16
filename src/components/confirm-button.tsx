@@ -1,10 +1,10 @@
 import { Button, Flex, Modal } from "@mantine/core";
-import { ReactNode } from "react";
 
 interface ConfirmProp {
   opened: boolean;
   close: () => void;
-  children: ReactNode;
+  onConfirm: () => void;
+  loading: boolean;
   button: {
     title: string;
     message: string;
@@ -12,9 +12,17 @@ interface ConfirmProp {
   };
 }
 
-const ConfirmData = ({ opened, close, children, button }: ConfirmProp) => {
+const ConfirmData = ({
+  opened,
+  close,
+  onConfirm,
+  button,
+  loading,
+}: ConfirmProp) => {
+
   return (
     <Modal
+      key={Math.random()}
       zIndex={100}
       opened={opened}
       onClose={close}
@@ -31,7 +39,14 @@ const ConfirmData = ({ opened, close, children, button }: ConfirmProp) => {
         >
           Cancel
         </Button>
-        {children}
+        <Button
+          loading={loading}
+          onClick={onConfirm}
+          size="xs"
+          color="var(--mantine-color-music-7)"
+        >
+          {button.btn}
+        </Button>
       </Flex>
     </Modal>
   );

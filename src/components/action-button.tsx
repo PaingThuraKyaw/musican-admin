@@ -6,13 +6,13 @@ const ActionButton = ({ children }: { children: ReactNode }) => {
   return (
     <Menu>
       <Menu.Target>
-        <Flex justify={"center"}>
-          <ActionIcon color="var(--mantine-color-music-7)" variant="light">
-            <IconDotsVertical size={20} />
-          </ActionIcon>
-        </Flex>
+       <Flex>
+         <ActionIcon color="var(--mantine-color-music-7)" variant="light" >
+          <IconDotsVertical size={20} />
+        </ActionIcon>
+       </Flex>
       </Menu.Target>
-      <MenuDropdown style={{ zIndex: 55 }}>{children}</MenuDropdown>
+      <MenuDropdown style={{zIndex : 55}} >{children}</MenuDropdown>
     </Menu>
   );
 };

@@ -8,6 +8,7 @@ import CreateMusic from "./components/create-music";
 import ActionButton from "../../components/action-button";
 import { useDeleteMusic } from "../../store/server/music/mutation";
 import ConfirmData from "../../components/confirm-button";
+import { useState } from "react";
 const Music = () => {
   const [value, setValue] = useDebouncedState("", 500);
 
@@ -18,6 +19,7 @@ const Music = () => {
   });
 
   const [opened, { open, close }] = useDisclosure(false);
+  const [deleteId, setDeleteId] = useState<number | null>(null);
 
   const deleteMusic = useDeleteMusic();
 
@@ -73,7 +75,10 @@ const Music = () => {
                         fz={12}
                         h={30}
                         w={100}
-                        onClick={open}
+                        onClick={() => {
+                          setDeleteId(id);
+                          open();
+                        }}
                         radius={"md"}
                         variant="filled"
                         color="var(--mantine-color-music-8)"
@@ -81,30 +86,6 @@ const Music = () => {
                         Delete {id}
                       </Button>
                     </ActionButton>
-
-                    <ConfirmData
-                      children={
-                        <Button
-                          loading={deleteMusic.isPending}
-                          onClick={() =>
-                            deleteMusic.mutate(id, {
-                              onSuccess: () => close(),
-                            })
-                          }
-                          size="xs"
-                          color="var(--mantine-color-music-7)"
-                        >
-                          Delete
-                        </Button>
-                      }
-                      opened={opened}
-                      close={close}
-                      button={{
-                        title: "Are you sure?",
-                        message: "This music delete  ",
-                        btn: "Delete",
-                      }}
-                    />
                   </>
                 );
               },
@@ -119,6 +100,24 @@ const Music = () => {
           recordsPerPage={10}
           onPageChange={() => {}}
         />
+
+        {deleteId && (
+          <ConfirmData
+            opened={opened}
+            onConfirm={() =>
+              deleteMusic.mutate(deleteId, {
+                onSuccess: () => close(),
+              })
+            }
+            close={close}
+            button={{
+              title: "Are you sure?",
+              message: "Are you sure you deleted the music?",
+              btn: "Delete",
+            }}
+            loading={deleteMusic.isPending}
+          />
+        )}
       </Box>
     </>
   );
