@@ -6,14 +6,16 @@ import { IconCheck, IconX } from "@tabler/icons-react";
 
 interface MusicProp {
   name: string;
-  artist_id: number;
-  song_mp3: File | null | string;
+  artist_id: number | null;
+  song_mp3: null | string;
   description: string;
-  song_image: File | null | string;
-  album_id: number;
+  song_image: null | string;
+  album_id: number | null;
 }
 
 const createMusic = (payload: MusicProp) => {
+  console.log(transformFormData(payload));
+
   const data = axios.post(`music`, transformFormData(payload), {
     headers: authJsonHeader(),
   });
@@ -79,9 +81,13 @@ export const useDeleteMusic = () => {
 };
 
 const updateMusic = async (id: number, payload: MusicProp) => {
-  const { data } = await axios.put(`music/${id}`, payload, {
-    headers: authJsonHeader(),
-  });
+  const { data } = await axios.post(
+    `music/${id}`,
+    transformFormData(payload, true),
+    {
+      headers: authJsonHeader(true),
+    }
+  );
   return data;
 };
 

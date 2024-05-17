@@ -10,12 +10,12 @@ export const authJsonHeader = (file?: boolean) => {
   };
 };
 
-export default function transformFormData<T>(payload: T) {
+export default function transformFormData<T>(payload: T, put?: boolean) {
   const formData = new FormData();
-
   for (const property in payload) {
     formData.append(property, payload[property] as string | Blob);
   }
+  if (put) formData.append("_method", "put");
 
   return formData;
 }

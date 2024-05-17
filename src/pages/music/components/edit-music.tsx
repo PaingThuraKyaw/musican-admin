@@ -63,10 +63,6 @@ const EditMusic = ({ data }: { data: dataProp }) => {
       }))
     : null;
 
-  console.log(
-    selectArtist?.find((art) => art.value === data.artist_id.toString())?.label
-  );
-
   // album
   const { data: album } = useAlbum({ page: "1", size: "999", search: "" });
 
@@ -86,6 +82,7 @@ const EditMusic = ({ data }: { data: dataProp }) => {
         {/* create form */}
         <Box mt={10}>
           <form
+            encType="application/x-www-form-urlencoded"
             onSubmit={form.onSubmit((value) =>
               edit.mutate(value, {
                 onSuccess: () => {

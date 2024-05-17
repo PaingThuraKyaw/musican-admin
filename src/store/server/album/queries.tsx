@@ -15,3 +15,4 @@ export const useAlbum = (payload: ApiPayload) => {
     queryFn: () => album(payload),
   });
 };
+
